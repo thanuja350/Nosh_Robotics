@@ -1,0 +1,114 @@
+/*
+ * Producer-Consumer Sensor Buffer Simulation
+ *
+ * Producer:
+ *   - Every 1 second generates 0-5 random bytes.
+ *   - Stores them in a global buffer.
+ *
+ * Consumer:
+ *   - Every 10 seconds checks the buffer.
+ *   - If buffer has at least 50 bytes:
+ *         Prints ONLY the latest 50 bytes (Hex)
+ *         Deletes ONLY those 50 bytes.
+ *   - Otherwise prints "Not enough data".
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <time.h>
+
+#define BUFFER_SIZE 500
+#define PRINT_SIZE 50
+#define RUN_TIME 30
+
+unsigned char buffer[BUFFER_SIZE];
+int count = 0;
+
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+/* Producer Thread */
+void *producer(void *arg)
+{
+    for (int sec = 1; sec <= RUN_TIME; sec++)
+    {
+        sleep(1);
+
+        int bytes = rand() % 6;      // Random 0-5 bytes
+
+        pthread_mutex_lock(&lock);
+
+        for (int i = 0; i < bytes && count < BUFFER_SIZE; i++)
+        {
+            buffer[count++] = rand() % 256;
+        }
+
+        printf("Time %2d sec : Added %d bytes -> Buffer = %d bytes\n",
+               sec, bytes, count);
+
+        pthread_mutex_unlock(&lock);
+    }
+
+    return NULL;
+}
+
+/* Consumer Thread */
+void *consumer(void *arg)
+{
+    for (int sec = 10; sec <= RUN_TIME; sec += 10)
+    {
+        sleep(10);
+
+        pthread_mutex_lock(&lock);
+
+        if (count >= PRINT_SIZE)
+        {
+            printf("\n==============================\n");
+            printf("Time %2d sec\n", sec);
+            printf("Latest %d Bytes:\n", PRINT_SIZE);
+
+            int start = count - PRINT_SIZE;
+
+            for (int i = start; i < count; i++)
+            {
+                printf("%02X ", buffer[i]);
+            }
+
+            printf("\n");
+
+            /* Delete only the printed 50 bytes */
+            count -= PRINT_SIZE;
+
+            printf("Remaining bytes in buffer = %d\n", count);
+            printf("==============================\n\n");
+        }
+        else
+        {
+            printf("\nTime %2d sec : Only %d bytes available (Less than %d)\n\n",
+                   sec, count, PRINT_SIZE);
+        }
+
+        pthread_mutex_unlock(&lock);
+    }
+
+    return NULL;
+}
+
+int main()
+{
+    srand(time(NULL));
+
+    pthread_t producerThread;
+    pthread_t consumerThread;
+
+    pthread_create(&producerThread, NULL, producer, NULL);
+    pthread_create(&consumerThread, NULL, consumer, NULL);
+
+    pthread_join(producerThread, NULL);
+    pthread_join(consumerThread, NULL);
+
+    pthread_mutex_destroy(&lock);
+
+    return 0;
+}

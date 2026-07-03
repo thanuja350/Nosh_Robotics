@@ -1,0 +1,47 @@
+Time  1 sec : Added 0 bytes -> Buffer = 0 bytes
+Time  2 sec : Added 2 bytes -> Buffer = 2 bytes
+Time  3 sec : Added 5 bytes -> Buffer = 7 bytes
+Time  4 sec : Added 2 bytes -> Buffer = 9 bytes
+Time  5 sec : Added 3 bytes -> Buffer = 12 bytes
+Time  6 sec : Added 3 bytes -> Buffer = 15 bytes
+Time  7 sec : Added 3 bytes -> Buffer = 18 bytes
+Time  8 sec : Added 5 bytes -> Buffer = 23 bytes
+Time  9 sec : Added 2 bytes -> Buffer = 25 bytes
+
+Time 10 sec : Only 25 bytes available (Less than 50)
+
+Time 10 sec : Added 5 bytes -> Buffer = 30 bytes
+Time 11 sec : Added 5 bytes -> Buffer = 35 bytes
+Time 12 sec : Added 5 bytes -> Buffer = 40 bytes
+Time 13 sec : Added 4 bytes -> Buffer = 44 bytes
+Time 14 sec : Added 3 bytes -> Buffer = 47 bytes
+Time 15 sec : Added 3 bytes -> Buffer = 50 bytes
+Time 16 sec : Added 1 bytes -> Buffer = 51 bytes
+Time 17 sec : Added 4 bytes -> Buffer = 55 bytes
+Time 18 sec : Added 3 bytes -> Buffer = 58 bytes
+Time 19 sec : Added 2 bytes -> Buffer = 60 bytes
+Time 20 sec : Added 5 bytes -> Buffer = 65 bytes
+
+==============================
+Time 20 sec
+Latest 50 Bytes:
+D0 DF B2 F2 BF 47 B9 E5 79 4F AC FB C8 D2 06 A6 31 09 BB 40 CA 73 D1 92 38 62 17 C9 CA 88 11 C3 61 3C BC E9 A9 BB BE FE EF 07 1C F2 E6 C3 79 DB D9 DB 
+Remaining bytes in buffer = 15
+==============================
+
+Time 21 sec : Added 0 bytes -> Buffer = 15 bytes
+Time 22 sec : Added 0 bytes -> Buffer = 15 bytes
+Time 23 sec : Added 3 bytes -> Buffer = 18 bytes
+Time 24 sec : Added 1 bytes -> Buffer = 19 bytes
+Time 25 sec : Added 4 bytes -> Buffer = 23 bytes
+Time 26 sec : Added 0 bytes -> Buffer = 23 bytes
+Time 27 sec : Added 0 bytes -> Buffer = 23 bytes
+Time 28 sec : Added 5 bytes -> Buffer = 28 bytes
+Time 29 sec : Added 3 bytes -> Buffer = 31 bytes
+Time 30 sec : Added 0 bytes -> Buffer = 31 bytes
+
+Time 30 sec : Only 31 bytes available (Less than 50)
+
+
+
+=== Code Execution Successful ===
